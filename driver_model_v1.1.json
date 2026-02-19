@@ -1,0 +1,6 @@
+{
+  "version": "1.1",
+  "entities": ["Driver", "Series", "Event", "Session", "Result"],
+  "standard": "ISO 8601 UTC",
+  "architecture": "RESTful"
+}
