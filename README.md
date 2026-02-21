@@ -1,4 +1,4 @@
-# RaceMates DriverDB & Results API
+# RaceMates Drivers & Results API
 Backend Scaffolding based on Michael's requirements:
 - Kotlin
 - Spring Boot
