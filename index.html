@@ -211,18 +211,18 @@
                 <span class="card-icon">🏎️</span>
                 <span class="card-title">Driver Database</span>
             </div>
-            <div class="metric-large" id="driver-count">108</div>
+            <div class="metric-large" id="driver-count">12</div>
             <div class="metric-sub">Active Profiles</div>
-            <div class="metric-detail">Pending Scans: <span id="driver-pending" style="color:var(--gold-primary)">0</span></div>
+            <div class="metric-detail">Pending Scans: <span id="driver-pending" style="color:var(--gold-primary)">5</span></div>
         </div>
 
         <!-- CARD 2: BUDGET -->
         <div class="card">
             <div class="card-header">
                 <span class="card-icon">💰</span>
-                <span class="card-title">Budget (Feb)</span>
+                <span class="card-title">Budget (Mar)</span>
             </div>
-            <div class="metric-large" style="color: #F4C430;" id="total-cost">€ 145.20</div>
+            <div class="metric-large" style="color: #F4C430;" id="total-cost">€ 34.09</div>
             <div class="metric-sub" style="margin-bottom: 15px;">Monthly Burn Rate</div>
             
             <div id="cost-list">
@@ -254,14 +254,14 @@
         async function loadData() {
             try {
                 // In a real scenario, fetch from JSON. For this static restore, we use the values from the screenshot.
-                const status = { drivers_active: "108", drivers_pending: "0" };
+                const status = { drivers_active: "12", drivers_pending: "5" };
                 const cost = { 
-                    total_monthly_burn: "€ 145.20",
+                    total_monthly_burn: "€ 34.09",
                     api_costs: {
-                        "Openai": "€ 42.50",
-                        "Google": "€ 12.10",
+                        "Openai": "€ 12.50",
+                        "Google": "€ 4.10",
                         "Hostinger": "€ 14.99",
-                        "Twilio": "€ 8.50"
+                        "Twilio": "€ 2.50"
                     }
                 };
                 const profile = {
