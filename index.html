@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RaceMates Mission Control v5.1 (Optimized)</title>
+    <title>RaceMates Mission Control v4.1</title>
     <style>
         :root { 
             --gold-primary: #D4AF37; /* Base Gold */
@@ -33,305 +33,269 @@
 
         .container { 
             width: 100%; 
-            max-width: 1200px; 
+            max-width: 480px; /* Mobile focused max-width based on screenshot */
             /* Glassmorphism over Carbon */
             background: rgba(20, 20, 20, 0.95); 
             border: 1px solid var(--gold-dark); 
-            border-radius: 12px; 
-            padding: 25px; 
+            border-radius: 20px; 
+            padding: 20px; 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); 
             box-sizing: border-box;
         }
 
         header { 
             border-bottom: 2px solid var(--gold-primary); 
-            margin-bottom: 30px; 
-            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
             display: flex; 
             justify-content: space-between; 
-            align-items: center; 
+            align-items: flex-start; 
         }
 
         h1 { 
             margin: 0; 
-            font-weight: 300; 
-            letter-spacing: 2px; 
+            font-size: 1.1rem; 
+            letter-spacing: 1px; 
             text-transform: uppercase; 
-            font-size: 1.8rem;
-        }
-        h1 span { font-weight: 700; color: var(--gold-primary); }
-
-        /* Search & Filter Bar (Optimized v4.1 Addition) */
-        .filter-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        
-        .filter-bar input, .filter-bar select {
-            background: #000;
-            border: 1px solid var(--gold-dark);
             color: #fff;
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-family: inherit;
-        }
-        
-        .filter-bar input { flex-grow: 1; }
-        .filter-bar select { min-width: 150px; cursor: pointer; }
-        .filter-bar input:focus, .filter-bar select:focus {
-            outline: none;
-            border-color: var(--gold-highlight);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            font-weight: 700;
         }
 
-        /* Grid Layout */
-        .dashboard-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 25px; 
+        .subtitle {
+            font-size: 0.65rem; 
+            color: var(--gold-primary); 
+            letter-spacing: 1px;
+            margin-top: 4px;
+            text-transform: uppercase;
         }
 
-        /* Driver Card (v4.1 Style) */
-        .card { 
-            background: linear-gradient(145deg, #1a1a1a, #111); 
-            border: 1px solid #333; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            transition: all 0.3s ease; 
-            position: relative;
-        }
-        .card:hover { 
-            border-color: var(--gold-primary); 
-            transform: translateY(-5px); 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+        .logo-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            background: #000;
         }
         
-        .card-header {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .card-img {
+        .logo-img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .card:hover .card-img { transform: scale(1.05); }
-        
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, #000 0%, transparent 100%);
-            padding: 20px 15px 10px;
         }
 
-        .card-name { 
-            font-size: 1.4rem; 
+        .section-title { 
+            width: 100%; 
+            margin: 10px 0 15px 0; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: var(--gold-primary); 
+            font-weight: bold;
+        }
+
+        .card { 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-left: 3px solid var(--gold-primary); /* Gold Accent Left */
+            border-radius: 12px; 
+            padding: 20px; 
+            background: #151515;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 1.2rem;
+        }
+
+        .card-title { 
+            font-size: 0.95rem; 
+            font-weight: 600;
+            color: #fff; 
+        }
+
+        /* Large Metrics */
+        .metric-large { 
+            font-size: 2.5rem; 
             font-weight: 700; 
-            margin: 0; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+            color: #fff;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+        .metric-sub { 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            color: #666; 
+            letter-spacing: 1px; 
+            margin-bottom: 5px;
+        }
+        .metric-detail {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Cost Table */
+        .cost-row { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 6px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .cost-row:last-child { border-bottom: none; }
+        .cost-val { font-weight: 500; color: #fff; }
+
+        /* Spotlight Profile */
+        .spotlight-container {
+            display: flex;
+            align-items: center;
+            background: #222;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
         }
         
-        .card-series {
-            color: var(--gold-highlight);
-            font-size: 0.9rem;
+        .spotlight-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-primary);
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .spotlight-info { flex: 1; }
+        .spotlight-name { font-weight: bold; font-size: 0.95rem; color: #fff; }
+        .spotlight-team { font-size: 0.75rem; color: var(--gold-primary); }
+        .spotlight-arrow { color: #555; font-size: 1.2rem; }
+
+        .footer { 
+            margin-top: 20px; 
+            font-size: 0.7rem; 
+            color: #444; 
+            text-align: center; 
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
         }
-
-        .card-stats {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #222;
-            background: rgba(0,0,0,0.3);
-        }
-        
-        .stat-item { text-align: center; }
-        .stat-val { display: block; font-size: 1.1rem; font-weight: 700; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
-
-        .status-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--gold-primary);
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        /* Footer */
-        .footer { 
-            margin-top: 40px; 
-            text-align: center; 
-            color: #555; 
-            font-size: 0.8rem; 
-            border-top: 1px solid #222; 
-            padding-top: 20px; 
-        }
-
     </style>
 </head>
 <body>
-
-<div class="container">
-    <header>
-        <h1>Race<span>Mates</span> Mission Control</h1>
-        <div style="text-align: right;">
-            <div style="font-size: 1.2rem; font-weight: 300;">Status: <span style="color: #4CAF50;">ONLINE</span></div>
-            <div style="font-size: 0.7rem; color: var(--gold-primary); letter-spacing: 1px;">MITCHI ENTERPRISE v5.1 (OPTIMIZED)</div>
-        </div>
-    </header>
-
-    <!-- Optimized Filter Bar (v4.1 Clean Style + v4.2 Logic) -->
-    <div class="filter-bar">
-        <input type="text" id="searchInput" placeholder="Search Driver (Name, Series)...">
-        <select id="categoryFilter">
-            <option value="all">All Categories</option>
-            <option value="GT3">GT3 / DTM</option>
-            <option value="Formula">Formula / Open Wheel</option>
-            <option value="US">US Racing (NASCAR/Indy)</option>
-            <option value="Stock">Stock Car</option>
-            <option value="Kart">Karting</option>
-        </select>
-        <select id="regionFilter">
-            <option value="all">Global Regions</option>
-            <option value="EU">Europe</option>
-            <option value="NA">North America</option>
-            <option value="ASIA">Asia / Oceania</option>
-            <option value="SA">South America</option>
-        </select>
-    </div>
-
-    <!-- Drivers Grid -->
-    <div class="dashboard-grid" id="driverGrid">
+    <div class="container">
+        <header>
+            <div>
+                <h1>Mission Control</h1>
+                <div class="subtitle">Mitchi Enterprise v4.1</div>
+            </div>
+            <div class="logo-container">
+                <img src="/public/assets/racemates_logo_gold.jpg" class="logo-img" alt="R">
+            </div>
+        </header>
         
-        <!-- Luca Link (Focus) -->
-        <div class="card" data-cat="GT3" data-reg="EU">
-            <div class="status-badge">FOCUS</div>
+        <div class="section-title">Live Status</div>
+        
+        <!-- CARD 1: DRIVER DATABASE -->
+        <div class="card">
             <div class="card-header">
-                <img src="/public/assets/drivers/luca_link_real.jpg" class="card-img" alt="Luca Link">
-                <div class="card-overlay">
-                    <div class="card-series">GT4 Germany</div>
-                    <div class="card-name">Luca Link</div>
-                </div>
+                <span class="card-icon">🏎️</span>
+                <span class="card-title">Driver Database</span>
             </div>
-            <div class="card-stats">
-                <div class="stat-item"><span class="stat-val">78</span><span class="stat-label">Market Val</span></div>
-                <div class="stat-item"><span class="stat-val">FK P.</span><span class="stat-label">Team</span></div>
-                <div class="stat-item"><span class="stat-val">DEU</span><span class="stat-label">Nat</span></div>
-            </div>
+            <div class="metric-large" id="driver-count">108</div>
+            <div class="metric-sub">Active Profiles</div>
+            <div class="metric-detail">Pending Scans: <span id="driver-pending" style="color:var(--gold-primary)">0</span></div>
         </div>
 
-        <!-- Larry ten Voorde (Master) -->
-        <div class="card" data-cat="GT3" data-reg="EU">
-            <div class="status-badge">CHAMPION</div>
+        <!-- CARD 2: BUDGET -->
+        <div class="card">
             <div class="card-header">
-                <!-- Placeholder if no image -->
-                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
-                <div class="card-overlay">
-                    <div class="card-series">Porsche Supercup</div>
-                    <div class="card-name">Larry ten Voorde</div>
-                </div>
+                <span class="card-icon">💰</span>
+                <span class="card-title">Budget (Feb)</span>
             </div>
-            <div class="card-stats">
-                <div class="stat-item"><span class="stat-val">92</span><span class="stat-label">Market Val</span></div>
-                <div class="stat-item"><span class="stat-val">Schum.</span><span class="stat-label">Team</span></div>
-                <div class="stat-item"><span class="stat-val">NED</span><span class="stat-label">Nat</span></div>
-            </div>
-        </div>
-
-        <!-- Kyle Larson (US Import) -->
-        <div class="card" data-cat="US" data-reg="NA">
-            <div class="status-badge">NEW</div>
-            <div class="card-header">
-                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
-                <div class="card-overlay">
-                    <div class="card-series">NASCAR Cup</div>
-                    <div class="card-name">Kyle Larson</div>
-                </div>
-            </div>
-            <div class="card-stats">
-                <div class="stat-item"><span class="stat-val">95</span><span class="stat-label">Market Val</span></div>
-                <div class="stat-item"><span class="stat-val">HMS</span><span class="stat-label">Team</span></div>
-                <div class="stat-item"><span class="stat-val">USA</span><span class="stat-label">Nat</span></div>
-            </div>
-        </div>
-
-        <!-- Ritomo Miyata (Asia Import) -->
-        <div class="card" data-cat="Formula" data-reg="ASIA">
-            <div class="status-badge">CRAWLED</div>
-            <div class="card-header">
-                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
-                <div class="card-overlay">
-                    <div class="card-series">Super Formula</div>
-                    <div class="card-name">Ritomo Miyata</div>
-                </div>
-            </div>
-            <div class="card-stats">
-                <div class="stat-item"><span class="stat-val">88</span><span class="stat-label">Market Val</span></div>
-                <div class="stat-item"><span class="stat-val">TOM'S</span><span class="stat-label">Team</span></div>
-                <div class="stat-item"><span class="stat-val">JPN</span><span class="stat-label">Nat</span></div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        RaceMates Systems GmbH &copy; 2026 &bull; Mitchi-Konzern Infrastructure &bull; <span style="color:var(--gold-dark)">Running on OpenAI/Google Hybrid Core</span>
-    </div>
-</div>
-
-<script>
-    // Optimized Filter Logic (Pure JS, Fast)
-    const searchInput = document.getElementById('searchInput');
-    const categoryFilter = document.getElementById('categoryFilter');
-    const regionFilter = document.getElementById('regionFilter');
-    const cards = document.querySelectorAll('.card');
-
-    function filterDrivers() {
-        const term = searchInput.value.toLowerCase();
-        const cat = categoryFilter.value;
-        const reg = regionFilter.value;
-
-        cards.forEach(card => {
-            const name = card.querySelector('.card-name').innerText.toLowerCase();
-            const series = card.querySelector('.card-series').innerText.toLowerCase();
-            const text = name + " " + series;
+            <div class="metric-large" style="color: #F4C430;" id="total-cost">€ 145.20</div>
+            <div class="metric-sub" style="margin-bottom: 15px;">Monthly Burn Rate</div>
             
-            const cardCat = card.getAttribute('data-cat');
-            const cardReg = card.getAttribute('data-reg');
+            <div id="cost-list">
+                <!-- Populated via JS -->
+            </div>
+        </div>
 
-            let matchesSearch = text.includes(term);
-            let matchesCat = cat === 'all' || cardCat === cat;
-            let matchesReg = reg === 'all' || cardReg === reg;
+        <!-- CARD 3: SPOTLIGHT -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-icon">👤</span>
+                <span class="card-title">Spotlight</span>
+            </div>
+            <a href="profile_LINK.html" style="text-decoration:none;">
+                <div class="spotlight-container" id="spotlight-content">
+                    <!-- Populated via JS -->
+                    <div style="padding:10px; color:#666;">Loading...</div>
+                </div>
+            </a>
+            <div style="font-size: 0.7rem; text-align: center; margin-top: 8px; color: #555;">Tap to view details</div>
+        </div>
 
-            if (matchesSearch && matchesCat && matchesReg) {
-                card.style.display = 'block'; // Or 'flex' depending on layout needs, but block works for grid items
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
+        <div class="footer">
+            Recent Productions &bull; Mitchi Systems
+        </div>
+    </div>
 
-    searchInput.addEventListener('input', filterDrivers);
-    categoryFilter.addEventListener('change', filterDrivers);
-    regionFilter.addEventListener('change', filterDrivers);
-</script>
+    <script>
+        async function loadData() {
+            try {
+                // In a real scenario, fetch from JSON. For this static restore, we use the values from the screenshot.
+                const status = { drivers_active: "108", drivers_pending: "0" };
+                const cost = { 
+                    total_monthly_burn: "€ 145.20",
+                    api_costs: {
+                        "Openai": "€ 42.50",
+                        "Google": "€ 12.10",
+                        "Hostinger": "€ 14.99",
+                        "Twilio": "€ 8.50"
+                    }
+                };
+                const profile = {
+                    name: "Mick Schumacher",
+                    team: "Alpine Endurance Team",
+                    image: "/public/assets/drivers/mick_real.jpg"
+                };
 
+                // Drivers
+                document.getElementById('driver-count').innerText = status.drivers_active;
+                document.getElementById('driver-pending').innerText = status.drivers_pending;
+
+                // Costs
+                document.getElementById('total-cost').innerText = cost.total_monthly_burn;
+                let costHtml = '';
+                for (const [k, v] of Object.entries(cost.api_costs)) {
+                    costHtml += `<div class="cost-row"><span>${k}</span><span class="cost-val">${v}</span></div>`;
+                }
+                document.getElementById('cost-list').innerHTML = costHtml;
+
+                // Spotlight
+                document.getElementById('spotlight-content').innerHTML = `
+                    <img src="${profile.image}" class="spotlight-img" onerror="this.src='https://via.placeholder.com/50/000/fff?text=Mick'">
+                    <div class="spotlight-info">
+                        <div class="spotlight-name">${profile.name}</div>
+                        <div class="spotlight-team">${profile.team}</div>
+                    </div>
+                    <div class="spotlight-arrow">›</div>
+                `;
+
+            } catch (e) { console.error(e); }
+        }
+        
+        loadData();
+    </script>
 </body>
 </html>
