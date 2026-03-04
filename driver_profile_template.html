@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Luca Link - RaceMates Profile</title>
+    <style>
+        :root { 
+            --gold-primary: #D4AF37; 
+            --gold-light: #F4C430;
+            --bg-dark: #0a0a0a; 
+            --card-bg: #1a1a1a; 
+        }
+        
+        body { 
+            background-color: var(--bg-dark); 
+            background-image: 
+                linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111),
+                linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
+            background-size: 20px 20px;
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            min-height: 100vh;
+        }
+        
+        /* Layout */
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Back Link */
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            color: #aaa; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            padding: 5px 10px;
+            background: #222;
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
+        
+        /* Header */
+        .header { 
+            background: linear-gradient(180deg, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0) 100%);
+            border-radius: 10px; 
+            padding: 20px; 
+            text-align: center; 
+            border: 1px solid var(--gold-primary); 
+            position: relative; 
+            overflow: hidden; 
+            display: block; 
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 100px; 
+            height: auto;
+            border-radius: 4px;
+            border: none;
+            box-shadow: none;
+            z-index: 10;
+            background: rgba(0,0,0,0.3);
+            padding: 3px;
+        }
+        
+        .avatar { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 3px solid var(--gold-primary); 
+            background: #000; 
+            margin: 0 auto 15px;
+            position: relative; 
+            z-index: 2; 
+            object-fit: cover;
+            object-position: top center; object-fit: cover; 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            display: block; 
+            box-sizing: border-box; 
+        }
+        
+        .name { font-size: 1.8rem; font-weight: bold; margin: 0; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        /* Next Race Badge */
+        .next-race {
+            margin: 15px 0 10px;
+            background: rgba(212, 175, 55, 0.15); 
+            border: 1px solid var(--gold-dark);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #fff;
+            display: inline-block; 
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Subscribe Button */
+        .subscribe-btn {
+            display: inline-block;
+            background: var(--gold-primary); 
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 5px; 
+            font-size: 0.8rem;
+            margin-top: 10px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        
+        .subscribe-btn.following {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            box-shadow: none;
+            padding: 8px 23px; 
+        }
+        
+        /* Sponsor Badge */
+        .sponsor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-decoration: none;
+        }
+        .sponsor-badge-label { font-size: 0.6rem; color: var(--gold-primary); text-transform: uppercase; font-weight: bold; }
+        .sponsor-badge-name { font-size: 0.8rem; color: #fff; font-weight: 500; }
+        .sponsor-badge-arrow { font-size: 0.7rem; color: var(--gold-primary); }
+
+        /* Tabs Styles */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .tablinks {
+            background-color: transparent;
+            color: #888;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+        }
+        .tablinks:hover { color: #fff; }
+        .tablinks.active {
+            color: var(--gold-primary);
+            border-bottom: 2px solid var(--gold-primary);
+        }
+        .tabcontent {
+            display: none;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Stats Grid */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            margin-top: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            padding-top: 20px; 
+        }
+        .stat-box { text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: bold; color: #fff; }
+        .stat-label { font-size: 0.65rem; color: #888; text-transform: uppercase; margin-top: 4px; }
+
+        /* Sections */
+        .section { 
+            background: #151515; 
+            border-radius: 10px; 
+            padding: 15px; 
+            margin-top: 20px; 
+            border: 1px solid #333; 
+        }
+        .section h3 { 
+            margin-top: 0; 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 10px; 
+            color: var(--gold-primary); 
+            font-size: 0.9rem; 
+            text-transform: uppercase;
+        }
+        
+        /* Market Value Box */
+        .market-value-box { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: linear-gradient(to right, rgba(212,175,55,0.1), transparent); 
+            padding: 15px; 
+            border-radius: 5px; 
+            border-left: 3px solid var(--gold-primary);
+        }
+        .mv-current { font-size: 1.5rem; font-weight: bold; color: #fff; }
+        .mv-trend { color: #4cd964; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th { text-align: left; color: #666; padding: 8px 0; border-bottom: 1px solid #333; font-weight: normal; }
+        td { padding: 12px 0; border-bottom: 1px solid #222; color: #ddd; }
+        .team-logo { 
+            width: 18px; height: 18px; vertical-align: middle; margin-right: 8px; 
+            background: var(--gold-primary); border-radius: 50%; display: inline-block; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">‹ Dashboard</a>
+
+        <!-- Header -->
+        <div class="header">
+            <img src="/public/assets/racemates_sport1_logo.jpg" class="header-logo" alt="RaceMates Sport1">
+            <img src="/public/assets/drivers/luca_link_real.jpg" class="avatar" alt="Luca Link">
+            <h1 class="name">Luca Link</h1>
+            <div class="headline">GT4 Germany • FK Performance</div>
+            <a href="#" class="sponsor-badge">
+                <span class="sponsor-badge-label">Main Sponsor</span>
+                <span class="sponsor-badge-name">Ravenol</span>
+                <span class="sponsor-badge-arrow">›</span>
+            </a>
+
+            
+            <div class="next-race">🇵🇹 Next: Official Test @ Portimão</div>
+            <br>
+            <button class="subscribe-btn" onclick="toggleSubscribe(this)">SUBSCRIBE</button>
+
+
+
+            <script>
+                function toggleSubscribe(btn) {
+                    if (btn.classList.contains('following')) {
+                        btn.classList.remove('following');
+                        btn.innerText = 'SUBSCRIBE';
+                    } else {
+                        btn.classList.add('following');
+                        btn.innerText = '✓ FOLLOWING';
+                    }
+                }
+                
+                function openTab(evt, tabName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].classList.remove("active");
+                    }
+                    document.getElementById(tabName).style.display = "block";
+                    evt.currentTarget.classList.add("active");
+                }
+            </script>
+            
+            <!-- Tabs Navigation -->
+            <div class="tab-nav">
+                <button class="tablinks active" onclick="openTab(event, 'Public')">PROFILE</button>
+                <button class="tablinks" onclick="openTab(event, 'News')">NEWS</button>
+                <button class="tablinks" onclick="openTab(event, 'Tech')">🔒 TECH</button>
+            </div>
+
+            <!-- Tab: Public Profile (Default) -->
+            <div id="Public" class="tabcontent" style="display: block;">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value">€ 75k</div>
+                        <div class="stat-label">Market Value</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">12K</div>
+                        <div class="stat-label">Social Reach</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">78</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3>📈 Market Analysis</h3>
+                    <div class="market-value-box">
+                        <div>
+                            <div class="mv-current">€ 75.000</div>
+                            <div class="mv-trend">▲ +15% (Trend)</div>
+                        </div>
+                        <div style="text-align: right; font-size: 0.75rem; color: #888;">
+                            Rank #12<br>Global Top 100
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🏎️ Career & Season 2026</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Series</th>
+                                <th>Team</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2026</td>
+                                <td><span class="team-logo"></span>GT4 GER</td>
+                                <td>FK Perf.</td>
+                                <td>145</td>
+                            </tr>
+                            <tr>
+                                <td>2025</td>
+                                <td><span class="team-logo"></span>GT4 GER</td>
+                                <td>Razoon</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2025</td>
+                                <td><span class="team-logo"></span>GT4 GER</td>
+                                <td>FK Perf.</td>
+                                <td>120</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: News Feed -->
+            <div id="News" class="tabcontent" style="display: none;">
+                <div class="section">
+                    <h3>📰 Latest Updates</h3>
+                    <div style="padding: 10px; border-bottom: 1px solid #333;">
+                        <div style="font-size: 0.8rem; color: #888;">Today, 09:15</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Test Day at Portimão</div>
+                        <div style="font-size: 0.9rem; color: #ccc;">"Great progress with the new aero package. Long runs looking consistent."</div>
+                    </div>
+                    <div style="padding: 10px;">
+                        <div style="font-size: 0.8rem; color: #888;">Yesterday, 14:00</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">New Helmet Design</div>
+                        <div style="font-size: 0.9rem; color: #ccc;">Revealing the 2026 helmet design featuring neon yellow accents.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Tech / Driver Log -->
+            <div id="Tech" class="tabcontent" style="display: none;">
+                <div class="section" style="border-color: var(--gold-primary);">
+                    <h3>🎤 Driver Log (Voice)</h3>
+                    <div style="text-align: center; padding: 20px;">
+                        <button style="background: #cc0000; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 1.5rem; box-shadow: 0 0 15px rgba(204,0,0,0.5);">🎙️</button>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: #888;">Tap to record session feedback</div>
+                    </div>
+                    
+                    <h3>📸 Dashboard Analytics</h3>
+                    <div style="text-align: center; padding: 20px; border: 1px dashed #444; border-radius: 10px; margin-bottom: 20px;">
+                        <span style="font-size: 2rem;">📸</span>
+                        <div style="margin-top: 5px; font-size: 0.9rem;">Upload Dashboard Photo</div>
+                        <div style="font-size: 0.7rem; color: #888; margin-top: 5px;">We extract laptimes & P-Best automatically</div>
+                    </div>
+
+                    <h3>🎽 Driver Gear</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.7rem; color: #888;">Helmet</div>
+                            <div style="font-weight: bold;">Schuberth</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.7rem; color: #888;">Suit</div>
+                            <div style="font-weight: bold;">Alpinestars</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.7rem; color: #888;">Gloves</div>
+                            <div style="font-weight: bold;">Alpinestars</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.7rem; color: #888;">Shoes</div>
+                            <div style="font-weight: bold;">Sparco</div>
+                        </div>
+                    </div>
+
+                    <h3>📝 Session Reports</h3>
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gold-primary);">
+                            <span>Portimão (Test)</span>
+                            <span>28.02.26</span>
+                        </div>
+                        <div style="font-weight: bold; margin: 5px 0;">Setup: Base A424_v2</div>
+                        <div style="font-size: 0.85rem; color: #ccc;">"Understeer in T5 exit. High degradation on rear left. Need to check tire pressures."</div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
