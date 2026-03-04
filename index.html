@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RaceMates Mission Control v5.0 (Hybrid)</title>
+    <title>RaceMates Mission Control v5.1 (Optimized)</title>
     <style>
         :root { 
             --gold-primary: #D4AF37; /* Base Gold */
@@ -38,15 +38,15 @@
             background: rgba(20, 20, 20, 0.95); 
             border: 1px solid var(--gold-dark); 
             border-radius: 12px; 
-            padding: 15px; 
+            padding: 25px; 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); 
             box-sizing: border-box;
         }
 
         header { 
             border-bottom: 2px solid var(--gold-primary); 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
+            margin-bottom: 30px; 
+            padding-bottom: 20px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -54,581 +54,250 @@
 
         h1 { 
             margin: 0; 
-            font-size: 1.3rem; 
-            letter-spacing: 1px; 
-            text-transform: uppercase; 
-            color: #fff;
-            text-shadow: 0 0 5px rgba(255,255,255,0.3);
-        }
-
-        .logo-img {
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--gold-primary);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-        }
-
-        .section-title { 
-            width: 100%; 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3); 
-            margin: 25px 0 15px 0; 
-            padding-bottom: 5px; 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
+            font-weight: 300; 
             letter-spacing: 2px; 
-            color: var(--gold-primary); 
-            font-weight: bold;
+            text-transform: uppercase; 
+            font-size: 1.8rem;
         }
+        h1 span { font-weight: 700; color: var(--gold-primary); }
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 15px; 
-        }
-
-        .card { 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-left: 3px solid var(--gold-primary); /* Gold Accent Left */
-            border-radius: 8px; 
-            padding: 15px; 
-            background: linear-gradient(145deg, #1a1a1a, #111);
-        }
-
-        .card h2 { 
-            margin-top: 0; 
-            font-size: 1rem; 
-            border-bottom: 1px dotted #444; 
-            padding-bottom: 8px; 
-            color: #ddd; 
+        /* Search & Filter Bar (Optimized v4.1 Addition) */
+        .filter-bar {
             display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Metrics */
-        .metric-large { 
-            font-size: 2.2rem; 
-            font-weight: bold; 
-            background: linear-gradient(to right, #fff, var(--gold-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 10px 0; 
-        }
-        .metric-label { font-size: 0.75rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }
-
-        .cost-row { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 6px; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-            padding-bottom: 4px; 
-            font-size: 0.9rem;
-        }
-
-        /* Profile Preview */
-        .profile-preview { 
-            display: flex; 
-            gap: 15px; 
-            align-items: center; 
-            margin-top: 10px; 
-            padding: 10px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 6px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-        .profile-preview:active {
-            border-color: var(--gold-primary);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .profile-img-small {
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            border: 2px solid var(--gold-primary);
-            object-fit: cover;
-            object-position: top center; /* Fix for Mick's face in preview */
-        }
-
-        .profile-name { font-weight: bold; color: #fff; font-size: 1rem; }
-        .profile-team { font-size: 0.8rem; color: #aaa; }
-        
-        /* New Production List */
-        .production-list {
-            margin-top: 10px;
-        }
-        .production-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #222;
-        }
-        .production-item:last-child { border-bottom: none; }
-        .prod-img { 
-            width: 30px; 
-            height: 30px; 
-            border-radius: 50%; 
-            margin-right: 10px; 
-            border: 1px solid #444; 
-            object-fit: contain; 
-            background-color: #000;
-        }
-        .prod-info { flex: 1; }
-        .prod-name { font-size: 0.9rem; font-weight: bold; }
-        .prod-series { font-size: 0.7rem; color: #888; }
-        .prod-badge { background: #333; color: var(--gold-primary); font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; }
-        
-        /* Status Lists */
-        ul { list-style: none; padding: 0; margin: 0; }
-        li { 
-            margin-bottom: 8px; 
-            font-size: 0.85rem; 
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #ccc;
-        }
-        .status-dot {
-            width: 8px; height: 8px; border-radius: 50%; background: #333;
-        }
-        .dot-green { background: #0f0; box-shadow: 0 0 5px #0f0; }
-        .dot-gold { background: var(--gold-primary); box-shadow: 0 0 5px var(--gold-primary); }
-
-        .footer { 
-            margin-top: 30px; 
-            font-size: 0.7rem; 
-            color: #666; 
-            text-align: center; 
-            width: 100%; 
-            border-top: 1px solid #222;
-            padding-top: 10px;
-        }
-    
-/* V4.2 ALPHA STYLES */
-
-        
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--gold-accent);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .logo { font-weight: bold; font-size: 1.2rem; color: var(--gold-accent); }
-        
-        h2 { border-left: 3px solid var(--gold-accent); padding-left: 10px; margin-top: 30px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Experts Grid */
-        .experts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 15px;
             margin-bottom: 30px;
-        }
-        .bot-card {
-            background: var(--card-bg);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
-            text-align: center;
+            border-radius: 8px;
             border: 1px solid #333;
-            transition: transform 0.2s;
         }
-        .bot-card:hover { transform: translateY(-3px); border-color: var(--gold-accent); }
-        .bot-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
-        .bot-name { font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
-        .bot-status { font-size: 0.7rem; color: var(--bot-active); text-transform: uppercase; font-weight: bold; }
-
-        /* Stats Dropdown */
-        .stats-container {
-            background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid #444;
-        }
-        details {
-            padding: 15px;
-            cursor: pointer;
-        }
-        summary {
-            font-weight: bold;
-            color: var(--gold-accent);
-            list-style: none; /* Hide default triangle */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.2rem; font-weight: bold; }
-        details[open] summary::after { content: '-'; }
         
-        .series-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-            border-top: 1px solid #444;
-            padding-top: 10px;
+        .filter-bar input, .filter-bar select {
+            background: #000;
+            border: 1px solid var(--gold-dark);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: inherit;
         }
-        .series-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #333;
-            font-size: 0.9rem;
-        }
-        .series-item:last-child { border-bottom: none; }
-        .count-badge-small {
-            background: #444;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+        
+        .filter-bar input { flex-grow: 1; }
+        .filter-bar select { min-width: 150px; cursor: pointer; }
+        .filter-bar input:focus, .filter-bar select:focus {
+            outline: none;
+            border-color: var(--gold-highlight);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
-        /* v4.2 New Features: Search & Filter */
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        input[type="text"] {
-            background: var(--card-bg);
-            border: 1px solid #444;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            flex-grow: 1;
-        }
-        select {
-            background: var(--card-bg);
-            border: 1px solid var(--gold-accent);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
+        /* Grid Layout */
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 25px; 
         }
 
-        .driver-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 15px;
-            border-left: 4px solid var(--gold-accent);
+        /* Driver Card (v4.1 Style) */
+        .card { 
+            background: linear-gradient(145deg, #1a1a1a, #111); 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            transition: all 0.3s ease; 
             position: relative;
         }
-        .status-badge {
-            background: #D4AF37;
-            color: black;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
+        .card:hover { 
+            border-color: var(--gold-primary); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
         }
-        .meta { color: #888; font-size: 0.85rem; margin-top: 5px; }
-    
-</style>
+        
+        .card-header {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .card:hover .card-img { transform: scale(1.05); }
+        
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, #000 0%, transparent 100%);
+            padding: 20px 15px 10px;
+        }
+
+        .card-name { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            margin: 0; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+        }
+        
+        .card-series {
+            color: var(--gold-highlight);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .card-stats {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #222;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .stat-item { text-align: center; }
+        .stat-val { display: block; font-size: 1.1rem; font-weight: 700; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gold-primary);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        /* Footer */
+        .footer { 
+            margin-top: 40px; 
+            text-align: center; 
+            color: #555; 
+            font-size: 0.8rem; 
+            border-top: 1px solid #222; 
+            padding-top: 20px; 
+        }
+
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div>
-                <h1>Mission Control</h1>
-                <div style="font-size: 0.7rem; color: var(--gold-primary); letter-spacing: 1px;">MITCHI ENTERPRISE v5.0 (MASTER)</div>
-            </div>
-            <img src="/public/assets/racemates_logo_gold.jpg" alt="RaceMates Logo" class="logo-img">
-        </header>
+
+<div class="container">
+    <header>
+        <h1>Race<span>Mates</span> Mission Control</h1>
+        <div style="text-align: right;">
+            <div style="font-size: 1.2rem; font-weight: 300;">Status: <span style="color: #4CAF50;">ONLINE</span></div>
+            <div style="font-size: 0.7rem; color: var(--gold-primary); letter-spacing: 1px;">MITCHI ENTERPRISE v5.1 (OPTIMIZED)</div>
+        </div>
+    </header>
+
+    <!-- Optimized Filter Bar (v4.1 Clean Style + v4.2 Logic) -->
+    <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Search Driver (Name, Series)...">
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="GT3">GT3 / DTM</option>
+            <option value="Formula">Formula / Open Wheel</option>
+            <option value="US">US Racing (NASCAR/Indy)</option>
+            <option value="Stock">Stock Car</option>
+            <option value="Kart">Karting</option>
+        </select>
+        <select id="regionFilter">
+            <option value="all">Global Regions</option>
+            <option value="EU">Europe</option>
+            <option value="NA">North America</option>
+            <option value="ASIA">Asia / Oceania</option>
+            <option value="SA">South America</option>
+        </select>
+    </div>
+
+    <!-- Drivers Grid -->
+    <div class="dashboard-grid" id="driverGrid">
         
-        <!-- SECTION 1: LIVE METRICS -->
-        <div class="section-title">Live Status</div>
-        <div class="grid">
-            <!-- Drivers -->
-            <div class="card">
-                <h2>🏎️ Driver Database</h2>
-                <div class="metric-large" id="driver-count">--</div>
-                <div class="metric-label">Active Profiles</div>
-                <div style="margin-top: 10px; font-size: 0.85rem; color: #aaa;">
-                    Pending Scans: <span id="driver-pending" style="color: var(--gold-primary); font-weight: bold;">--</span>
+        <!-- Luca Link (Focus) -->
+        <div class="card" data-cat="GT3" data-reg="EU">
+            <div class="status-badge">FOCUS</div>
+            <div class="card-header">
+                <img src="/public/assets/drivers/luca_link_real.jpg" class="card-img" alt="Luca Link">
+                <div class="card-overlay">
+                    <div class="card-series">GT4 Germany</div>
+                    <div class="card-name">Luca Link</div>
                 </div>
             </div>
-
-            <!-- Costs -->
-            <div class="card">
-                <h2>💰 Budget (Feb)</h2>
-                <div class="metric-large" id="total-cost">--</div>
-                <div class="metric-label">Monthly Burn Rate</div>
-                <div id="cost-details" style="margin-top: 15px; font-size: 0.85rem; color: #ccc;"></div>
-            </div>
-
-            <!-- Sample Profile -->
-            <div class="card">
-                <h2>👤 Spotlight</h2>
-                <a href="profile.html" style="text-decoration:none; color:inherit;">
-                    <div class="profile-preview" id="profile-container">Loading...</div>
-                </a>
-                <div style="font-size: 0.7rem; text-align: center; margin-top: 5px; color: #666;">Tap to view details</div>
+            <div class="card-stats">
+                <div class="stat-item"><span class="stat-val">78</span><span class="stat-label">Market Val</span></div>
+                <div class="stat-item"><span class="stat-val">FK P.</span><span class="stat-label">Team</span></div>
+                <div class="stat-item"><span class="stat-val">DEU</span><span class="stat-label">Nat</span></div>
             </div>
         </div>
 
-        <!-- SECTION 2: NEW PRODUCTIONS -->
-         <div class="section-title">🔥 Recent Productions</div>
-         <div class="grid">
-            <div class="card" style="grid-column: span 3;">
-                <h2>Latest Generated Profiles</h2>
-                <div class="production-list">
-                    <a href="profile_LINK.html" style="text-decoration:none; color: inherit;"><div class="production-item"><img src="/public/assets/drivers/luca_link_real.jpg" class="prod-img" style="object-fit: cover; object-position: top center;"><div class="prod-info"><div class="prod-name">Luca Link</div><div class="prod-series">GT4 Germany • FK Performance</div></div><div class="prod-badge">78</div></div></a>
-                    <a href="profile_RAST.html" style="text-decoration:none; color: inherit;">
-                        <div class="production-item">
-                            <img src="/public/assets/racemates_logo_gold.jpg" class="prod-img">
-                            <div class="prod-info">
-                                <div class="prod-name">Rene Rast</div>
-                                <div class="prod-series">DTM • Schubert Motorsport</div>
-                            </div>
-                            <div class="prod-badge">89</div>
-                        </div>
-                    </a>
-                    <a href="profile_PREI.html" style="text-decoration:none; color: inherit;">
-                        <div class="production-item">
-                            <img src="/public/assets/racemates_logo_gold.jpg" class="prod-img">
-                            <div class="prod-info">
-                                <div class="prod-name">Thomas Preining</div>
-                                <div class="prod-series">DTM • Manthey EMA</div>
-                            </div>
-                            <div class="prod-badge">87</div>
-                        </div>
-                    </a>
-                    <a href="profile_KVDL.html" style="text-decoration:none; color: inherit;">
-                        <div class="production-item">
-                            <img src="/public/assets/racemates_logo_gold.jpg" class="prod-img">
-                            <div class="prod-info">
-                                <div class="prod-name">Kelvin van der Linde</div>
-                                <div class="prod-series">DTM • ABT Sportsline</div>
-                            </div>
-                            <div class="prod-badge">86</div>
-                        </div>
-                    </a>
-                    <a href="profile_FEL.html" style="text-decoration:none; color: inherit;">
-                        <div class="production-item">
-                            <img src="/public/assets/racemates_logo_gold.jpg" class="prod-img">
-                            <div class="prod-info">
-                                <div class="prod-name">Ricardo Feller</div>
-                                <div class="prod-series">DTM • ABT Sportsline</div>
-                            </div>
-                            <div class="prod-badge">85</div>
-                        </div>
-                    </a>
-                     <a href="profile_ENG.html" style="text-decoration:none; color: inherit;">
-                        <div class="production-item">
-                            <img src="/public/assets/racemates_logo_gold.jpg" class="prod-img">
-                            <div class="prod-info">
-                                <div class="prod-name">Maro Engel</div>
-                                <div class="prod-series">DTM • Winward Racing</div>
-                            </div>
-                            <div class="prod-badge">84</div>
-                        </div>
-                    </a>
+        <!-- Larry ten Voorde (Master) -->
+        <div class="card" data-cat="GT3" data-reg="EU">
+            <div class="status-badge">CHAMPION</div>
+            <div class="card-header">
+                <!-- Placeholder if no image -->
+                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
+                <div class="card-overlay">
+                    <div class="card-series">Porsche Supercup</div>
+                    <div class="card-name">Larry ten Voorde</div>
                 </div>
             </div>
-         </div>
-
-
-        <!-- SECTION 3: SYSTEM PHASES -->
-        <div class="section-title">System Health</div>
-        <div class="grid">
-            <!-- Phase 1 -->
-            <div class="card">
-                <h2>🟢 Core Systems</h2>
-                <ul>
-                    <li><div class="status-dot dot-green"></div> Voice (Onyx v2.2)</li>
-                    <li><div class="status-dot dot-green"></div> Avatar (Mitchi Icon)</li>
-                    <li><div class="status-dot dot-green"></div> GitHub (RaceMates-Drivers)</li>
-                </ul>
-            </div>
-
-            <!-- Agents -->
-             <div class="card">
-                <h2>🤖 Mitchi Agents</h2>
-                <ul>
-                    <li><div class="status-dot dot-green"></div> Mitchi-Dev (Online)</li>
-                    <li><div class="status-dot dot-gold"></div> Mitchi-Marketing (Generating)</li>
-                </ul>
+            <div class="card-stats">
+                <div class="stat-item"><span class="stat-val">92</span><span class="stat-label">Market Val</span></div>
+                <div class="stat-item"><span class="stat-val">Schum.</span><span class="stat-label">Team</span></div>
+                <div class="stat-item"><span class="stat-val">NED</span><span class="stat-label">Nat</span></div>
             </div>
         </div>
-        
-        
-    <div class="section-title" style="color:#fff; border-color:#fff; margin-top:50px;">/// V4.2 ALPHA FEATURES ///</div>
-    <div style="font-size: 0.8rem;">Last Sync: <span style="color:var(--gold-accent)">03.03.2026 - 16:35 CET</span> | Status: <span style="color:#0f0">LIVE</span></div>
-</div>
 
-<h2>Mitchi-Konzern Experten</h2>
-<div class="experts-grid">
-    <div class="bot-card">
-        <span class="bot-icon">⚖️</span>
-        <div class="bot-name">Mitchi-Legal</div>
-        <div class="bot-status">● Active</div>
-    </div>
-    <div class="bot-card">
-        <span class="bot-icon">💻</span>
-        <div class="bot-name">Mitchi-Dev</div>
-        <div class="bot-status">● Active</div>
-    </div>
-    <div class="bot-card">
-        <span class="bot-icon">📣</span>
-        <div class="bot-name">Mitchi-Marketing</div>
-        <div class="bot-status">● Active</div>
-    </div>
-    <div class="bot-card">
-        <span class="bot-icon">📊</span>
-        <div class="bot-name">Mitchi-Finance</div>
-        <div class="bot-status">● Active</div>
-    </div>
-    <div class="bot-card">
-        <span class="bot-icon">🏎️</span>
-        <div class="bot-name">Mitchi-Moderator</div>
-        <div class="bot-status">● Active</div>
-    </div>
-</div>
+        <!-- Kyle Larson (US Import) -->
+        <div class="card" data-cat="US" data-reg="NA">
+            <div class="status-badge">NEW</div>
+            <div class="card-header">
+                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
+                <div class="card-overlay">
+                    <div class="card-series">NASCAR Cup</div>
+                    <div class="card-name">Kyle Larson</div>
+                </div>
+            </div>
+            <div class="card-stats">
+                <div class="stat-item"><span class="stat-val">95</span><span class="stat-label">Market Val</span></div>
+                <div class="stat-item"><span class="stat-val">HMS</span><span class="stat-label">Team</span></div>
+                <div class="stat-item"><span class="stat-val">USA</span><span class="stat-label">Nat</span></div>
+            </div>
+        </div>
 
-<h2>Database Intelligence</h2>
-<div class="stats-container">
-    <details>
-        <summary>
-            <span>📊 Active Series & Driver Counts</span>
-            <span>Total Series: 5</span>
-        </summary>
-        <ul class="series-list">
-            <li class="series-item"><span>🏎️ Super Formula (Asia)</span> <span class="count-badge-small">2 Drivers</span></li>
-            <li class="series-item"><span>🇺🇸 NASCAR Cup Series</span> <span class="count-badge-small">1 Driver</span></li>
-            <li class="series-item"><span>🇺🇸 IndyCar Series</span> <span class="count-badge-small">1 Driver</span></li>
-            <li class="series-item"><span>🇧🇷 Stock Car Pro Series</span> <span class="count-badge-small">1 Driver</span></li>
-            <li class="series-item"><span>🏆 Porsche Supercup</span> <span class="count-badge-small">1 Driver</span></li>
-        </ul>
-    </details>
-</div>
+        <!-- Ritomo Miyata (Asia Import) -->
+        <div class="card" data-cat="Formula" data-reg="ASIA">
+            <div class="status-badge">CRAWLED</div>
+            <div class="card-header">
+                <div style="width:100%; height:100%; background:#222; display:flex; align-items:center; justify-content:center; color:#444;">NO IMG</div>
+                <div class="card-overlay">
+                    <div class="card-series">Super Formula</div>
+                    <div class="card-name">Ritomo Miyata</div>
+                </div>
+            </div>
+            <div class="card-stats">
+                <div class="stat-item"><span class="stat-val">88</span><span class="stat-label">Market Val</span></div>
+                <div class="stat-item"><span class="stat-val">TOM'S</span><span class="stat-label">Team</span></div>
+                <div class="stat-item"><span class="stat-val">JPN</span><span class="stat-label">Nat</span></div>
+            </div>
+        </div>
 
-<h2>Driver Tracker & Global Crawl</h2>
-<!-- v4.2 Controls -->
-<div class="controls">
-    <input type="text" id="searchInput" placeholder="Search Driver (e.g. 'Kyle')...">
-    <select id="categoryFilter">
-        <option value="all">All Categories</option>
-        <option value="GT3">GT3 / DTM</option>
-        <option value="Formula">Formula</option>
-        <option value="Kart">Karting</option>
-        <option value="US">US Racing</option>
-        <option value="Stock">Stock Car</option>
-    </select>
-    <select id="regionFilter">
-        <option value="all">Global</option>
-        <option value="EU">Europe</option>
-        <option value="NA">North America</option>
-        <option value="ASIA">Asia / Oceania</option>
-        <option value="SA">South America</option>
-    </select>
-</div>
-
-<div class="driver-grid" id="driverGrid">
-    <!-- North America Batch -->
-    <div class="card" data-cat="US" data-reg="NA">
-        <div class="status-badge">NEW / CRAWLED</div>
-        <h3>Kyle Larson</h3>
-        <div class="meta">Series: NASCAR Cup Series</div>
-        <div class="meta">Nationality: USA</div>
-    </div>
-    <div class="card" data-cat="US" data-reg="NA">
-        <div class="status-badge">NEW / CRAWLED</div>
-        <h3>Josef Newgarden</h3>
-        <div class="meta">Series: IndyCar</div>
-        <div class="meta">Nationality: USA</div>
     </div>
 
-    <!-- Asia Batch -->
-    <div class="card" data-cat="Formula" data-reg="ASIA">
-        <div class="status-badge">NEW / CRAWLED</div>
-        <h3>Ritomo Miyata</h3>
-        <div class="meta">Series: Super Formula / F2</div>
-        <div class="meta">Nationality: JPN</div>
-    </div>
-    <div class="card" data-cat="Formula" data-reg="ASIA">
-        <div class="status-badge">NEW / CRAWLED</div>
-        <h3>Liam Lawson</h3>
-        <div class="meta">Series: Super Formula</div>
-        <div class="meta">Nationality: NZL</div>
-    </div>
-
-    <!-- South America Batch -->
-    <div class="card" data-cat="Stock" data-reg="SA">
-        <div class="status-badge">NEW / CRAWLED</div>
-        <h3>Felipe Massa</h3>
-        <div class="meta">Series: Stock Car Pro Series</div>
-        <div class="meta">Nationality: BRA</div>
-    </div>
-
-    <!-- Existing Core -->
-    <div class="card" data-cat="GT3" data-reg="EU">
-        <div class="status-badge">GOLDEN MASTER</div>
-        <h3>Larry ten Voorde</h3>
-        <div class="meta">Series: Porsche Supercup</div>
-        <div class="meta">Nationality: NED</div>
-    </div>
-</div>
     <div class="footer">
-            System: Mitchi-Dev | Sync: <span id="last-sync">--</span> | RaceMates CI v1.0
-        </div>
+        RaceMates Systems GmbH &copy; 2026 &bull; Mitchi-Konzern Infrastructure &bull; <span style="color:var(--gold-dark)">Running on OpenAI/Google Hybrid Core</span>
     </div>
+</div>
 
-    <script>
-        // Use Fetch to update data
-        async function loadData() {
-            try {
-                const [statusRes, costRes, profileRes] = await Promise.all([
-                    fetch('dashboard_status.json'),
-                    fetch('current_costs.json'),
-                    fetch('driver_profile_mockup.json')
-                ]);
-
-                const status = await statusRes.json();
-                const cost = await costRes.json();
-                const profile = await profileRes.json();
-
-                // Drivers
-                document.getElementById('driver-count').innerText = status.drivers_active;
-                document.getElementById('driver-pending').innerText = status.drivers_pending;
-                document.getElementById('last-sync').innerText = status.last_refresh.substring(11, 19) + " UTC";
-
-                // Costs
-                document.getElementById('total-cost').innerText = cost.total_monthly_burn;
-                let costHtml = '';
-                for (const [k, v] of Object.entries(cost.api_costs)) {
-                    const name = k.charAt(0).toUpperCase() + k.slice(1);
-                    costHtml += `<div class="cost-row"><span>${name}</span><span style="color:#fff;">${v}</span></div>`;
-                }
-                document.getElementById('cost-details').innerHTML = costHtml;
-
-                // Profile
-                document.getElementById('profile-container').innerHTML = `
-                    <img src="${profile.image_url}" class="profile-img-small" alt="Profile">
-                    <div class="profile-details">
-                        <div class="profile-name">${profile.name}</div>
-                        <div class="profile-team" style="color: var(--gold-primary);">${profile.team}</div>
-                    </div>
-                    <div style="font-size: 1.2rem; color: #444;">›</div>
-                `;
-            } catch (e) { console.error(e); }
-        }
-        loadData();
-        setInterval(loadData, 30000);
-    </script>
 <script>
-/* V4.2 FILTER LOGIC */
-
+    // Optimized Filter Logic (Pure JS, Fast)
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
     const regionFilter = document.getElementById('regionFilter');
@@ -640,7 +309,10 @@
         const reg = regionFilter.value;
 
         cards.forEach(card => {
-            const text = card.innerText.toLowerCase();
+            const name = card.querySelector('.card-name').innerText.toLowerCase();
+            const series = card.querySelector('.card-series').innerText.toLowerCase();
+            const text = name + " " + series;
+            
             const cardCat = card.getAttribute('data-cat');
             const cardReg = card.getAttribute('data-reg');
 
@@ -649,7 +321,7 @@
             let matchesReg = reg === 'all' || cardReg === reg;
 
             if (matchesSearch && matchesCat && matchesReg) {
-                card.style.display = 'block';
+                card.style.display = 'block'; // Or 'flex' depending on layout needs, but block works for grid items
             } else {
                 card.style.display = 'none';
             }
@@ -659,7 +331,7 @@
     searchInput.addEventListener('input', filterDrivers);
     categoryFilter.addEventListener('change', filterDrivers);
     regionFilter.addEventListener('change', filterDrivers);
-
 </script>
+
 </body>
 </html>
