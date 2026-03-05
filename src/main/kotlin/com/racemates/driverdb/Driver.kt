@@ -9,5 +9,9 @@ data class Driver(
     val name: String,
     val nationality: String,
     val team: String,
-    val dateOfBirth: Instant? = null
+    val dateOfBirth: Instant? = null,
+    val series: String,
+    val points: Int?,
+    val status: String,
+    val imageUrl: String? = null
 )
